@@ -2,21 +2,15 @@
 
 namespace App\Controller;
 
-use App\Data\SearchData;
 use App\Entity\Ouvrage;
-use App\Entity\OuvrageSearch;
-use App\Entity\SiteEntreposage;
 use App\Form\OuvrageFormType;
-use App\Form\OuvrageSearchType;
 use App\Form\OuvrageStockType;
-use Doctrine\Common\Collections\ArrayCollection;
-use Knp\Component\Pager\PaginatorInterface;
-use App\Repository\OuvrageRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\UniqueValidator;
 
 class OuvrageController extends AbstractController
 {
@@ -49,6 +43,13 @@ class OuvrageController extends AbstractController
         $form->handleRequest($request);
 //        Vérification que les valeurs entréess sont corrects
         if ($form->isSubmitted() && $form->isValid()) {
+//            if ($ouvrage->getTitre() === UniqueEntity::CLASS_CONSTRAINT && $ouvrage->getSite() === UniqueEntity::CLASS_CONSTRAINT) {
+//                $this->addFlash("alert", "Création non valide car cet ouvrage est déjà existant sur ce site !");
+//                return $this->render('ouvrage/ajouter.html.twig', [
+//                    'form_title' => 'Etat stock',
+//                    'form' => $form->createView(),
+//                    'ouvrage' => $ouvrage]);
+//            }
 //        Les informations sont envoyées en BDD
             $em = $this->getDoctrine()->getManager();
             $em->persist($ouvrage);
@@ -144,7 +145,7 @@ class OuvrageController extends AbstractController
         //Vérification des données du formulaire
         if ($form->isSubmitted() && $form->isValid()) {
 
-            //Récupère le choix (entrée ou sortie) et la quantité
+            //Récupère le choix (entrée ou/et sortie) et la quantité
             $quantiteEntree = $form->get('quantiteEntree')->getViewData();
             $quantiteSortie = $form->get('quantiteSortie')->getViewData();
 

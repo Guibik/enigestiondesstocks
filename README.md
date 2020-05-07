@@ -71,8 +71,6 @@ APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear
 composer require symfony/apache-pack
 ```
 
-5. Insérez le site de Nevers dans la table Site
-
 
 ## Contributeur
 
