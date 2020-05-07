@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ form_title }}{% endblock %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+
+    {{ form_row(form.dateEtatStock) }}
+
+    {{ form_row(form.quantiteEntree) }}
+
+    {{ form_row(form.quantiteSortie) }}
+
+    {{ form_row(form.detailOperation) }}
+
+    {{ form_end(form) }}
+{% endblock %}

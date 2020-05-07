@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ form_title }}{% endblock %}
+
+{% block body %}
+
+    <div class="container container-border">
+        <h1>{{ form_title }}</h1>
+        <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <table class="table table-striped encadrement-title">
+                <thead>
+                <tr class="title-search">
+                    <th scope="col">Nom</th>
+                    <th scope="col">Adresse</th>
+                    <th scope="col">CP</th>
+                    <th scope="col">Ville</th>
+                    <th scope="col">Infos</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for site in sites|sort((a, b) => a.nomSite <=> b.nomSite) %}
+                    <tr>
+                        <td>{{ site.nomSite|upper }}</td>
+                        <td>{{ site.adresse }}</td>
+                        <td>{{ site.codePostal }}</td>
+                        <td>{{ site.ville }}</td>
+                        <td>{{ site.infoUtile }}</td>
+                        <td> <div class="row">
+                                <div class="col-md-6">
+                            <button type="button" class="btn btn-primary offset-4"><a
+                                        href="{{ path('updateSite', {'id': site.id}) }}">Modifier</a></button>
+                                </div>
+                                <div class="col-md-6">
+                            <button type="button" class="btn btn-primary offset-4"><a
+                                        href="{{ path('deleteSite', {'id': site.id}) }}">Supprimer</a></button>
+                                </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+{#    <div class="container mt-4" style="color: #0a0a0a">#}
+{#        <h1>{{ form_title }}</h1>#}
+{#        <div class="row">#}
+{#            {% for site in sites %}#}
+{#                <div class="card detail col-md-6">#}
+{#                    <dl class="row">#}
+
+{#                        <dt class="col-sm-3 offset-3">Nom du site :</dt>#}
+{#                        <dd class="col-sm-6">{{ site.nomSite }}</dd>#}
+
+{#                        <dt class="col-sm-3 offset-3">Adresse :</dt>#}
+{#                        <dd class="col-sm-6">{{ site.adresse }}</dd>#}
+
+{#                        <dt class="col-sm-3 offset-3">Code postal :</dt>#}
+{#                        <dd class="col-sm-6">{{ site.codePostal }}</dd>#}
+
+{#                        <dt class="col-sm-3 offset-3">Ville :</dt>#}
+{#                        <dd class="col-sm-6">{{ site.ville }}</dd>#}
+
+{#                        <dt class="col-sm-3 offset-3">Pièce de stockage :</dt>#}
+{#                        <dd class="col-sm-6">{{ site.infoUtile }}</dd>#}
+
+
+{#                        <button type="button" class="btn btn-default col-sm-3 offset-3"><a#}
+{#                                    href="{{ path('updateSite', {'id': site.id}) }}">Modifier</a></button>#}
+{#                        <button type="button" class="btn btn-default col-sm-3 offset-3"><a#}
+{#                                    href="{{ path('deleteSite', {'id': site.id}) }}">Supprimer</a></button>#}
+
+{#                    </dl>#}
+{#                </div>#}
+{#            {% endfor %}#}
+{#        </div>#}
+{#    </div>#}
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme siteForm 'bootstrap_4_horizontal_layout.html.twig' %}
+
+{% block title %} {{ form_title }}{% endblock %}
+
+{% block body %}
+
+    <div class="container-form">
+        <form id="contact" action="" method="post">
+            <h3 style="text-align: center;">{{ form_title }}</h3>
+            {{ form_start(siteForm) }}
+            <fieldset>
+                {{ form_widget(siteForm.nomSite) }}
+            </fieldset>
+            <fieldset>
+                {{ form_widget(siteForm.adresse) }}
+            </fieldset>
+            <fieldset>
+                {{ form_widget(siteForm.codePostal) }}
+            </fieldset>
+            <fieldset>
+                {{ form_widget(siteForm.ville) }}
+            </fieldset>
+            <fieldset>
+                {{ form_widget(siteForm.infoUtile) }}
+            </fieldset>
+            <fieldset>
+                <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Enregistrer</button>
+                {{ form_end(siteForm) }}
+            </fieldset>
+        </form>
+    </div>
+
+
+
+{#    <div class="container">#}
+{#        <h3>{{ form_title }}</h3>#}
+{#        <br>#}
+{#        <div class="form-row">#}
+{#            <div class="form-groupe col-md-10">#}
+{#                {{ form_start(siteForm) }}#}
+{#                {{ form_widget(siteForm) }}#}
+{#                <br>#}
+{#                <button class="btn btn-success" type="submit">Valider</button>#}
+{#                {{ form_end(siteForm) }}#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Se connecter{% endblock %}
+
+
+
+{% block body %}
+
+    <div class="login-wrap">
+        <form method="post">
+            {% if error is defined %}
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}
+                    </div>
+                {% endif %}
+            {% endif %}
+
+            <div class="login-html">
+                <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Connectez-vous</label>
+                <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab"></label>
+                <div class="login-form">
+                    <div class="sign-in-htm">
+                        <div class="group">
+                            <label class="label" for="inputEmail">Email</label>
+                            <input type="text" value="{{ app.user.email|default('') }}" name="email" id="inputEmail"
+                                   class="input" required autofocus>
+                        </div>
+                        <div class="group">
+                            <label class="label" for="inputPassword">Password</label>
+                            <input type="password" name="password" id="inputPassword" class="input"
+                                   required>
+                        </div>
+                        <div class="group">
+                            {#                        <input type="submit" class="button" value="Sign In">#}
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                            <button class="button" type="submit">Me connecter</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+    {#    <br>#}
+    {#    <div class="container container-formulaire">#}
+    {#        <form method="post">#}
+    {#            {% if error is defined %}#}
+    {#                {% if error %}#}
+    {#                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}#}
+    {#                    </div>#}
+    {#                {% endif %}#}
+    {#            {% endif %}#}
+    {#            <br>#}
+
+    {#            <label class="col-sm-4 offset-4" for="inputEmail">Email</label>#}
+    {#            <input type="text" value="{{ app.user.email|default('') }}" name="email" id="inputEmail"#}
+    {#                   class="form-control col-sm-4 offset-4" required autofocus>#}
+    {#            <br>#}
+    {#            <label class="col-sm-4 offset-4" for="inputPassword">Mot de passe</label>#}
+    {#            <input type="password" name="password" id="inputPassword" class="form-control col-sm-4 offset-4"#}
+    {#                   required>#}
+    {#            <br>#}
+    {#            <div class="col-sm-4 offset-4">#}
+    {#                <input type="checkbox" id="remember_me" name="_remember_me"/>#}
+    {#                <label for="remember_me">Se souvenir de moi</label>#}
+    {#                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">#}
+    {#                <br>#}
+    {#                <button class="btn btn-outline-dark" type="submit">Me connecter</button>#}
+
+    {#            </div>#}
+    {#        </form>#}
+    {#    </div>#}
+{% endblock %}

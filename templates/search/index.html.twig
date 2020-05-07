@@ -1,0 +1,215 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ form_title }}{% endblock %}
+
+
+
+
+{% block body %}
+    {% block javascripts %}
+        <script src="/public/js/trier.js"></script>
+    {% endblock %}
+    <div class="container">
+        <div class="row">
+            <!-- BEGIN SEARCH RESULT -->
+            <div class="col-md-12">
+                <div class="grid search">
+                    <div class="grid-body">
+                        <div class="row">
+                            <!-- BEGIN FILTERS -->
+                            <div class="col-md-3">
+                                <h2 class="grid-title"><i class="fa fa-filter"></i> Rechercher par</h2>
+                                <hr>
+
+                                <div class="padding"></div>
+
+
+                                {{ form_start(form) }}
+
+                                {{ form_row(form.sites) }}
+
+                                {{ form_row(form.q) }}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        {{ form_row(form.filieres) }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form_row(form.technos) }}
+                                    </div>
+                                </div>
+
+                                <div class="padding"></div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        {{ form_row(form.minQ) }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form_row(form.maxQ) }}
+                                    </div>
+                                </div>
+
+                                <div class="padding"></div>
+
+                                <!-- START BUTTONS -->
+                                <div class="row">
+                                    <div class="col-md-12" style="text-align: center; margin-bottom: 20px;">
+
+                                        <button type="submit" class="btn btn-primary" id="search">Rechercher</button>
+                                    </div>
+                                    {#                                    <div class="col-md-6">#}
+                                    {#                                        <a class="btn btn-primary" href="{{ path('addOuvrage') }}">#}
+                                    {#                                            <span>Ajouter un nouvel ouvrage</span>#}
+                                    {#                                        </a>#}
+                                    {#                                    </div>#}
+                                </div>
+                                <!-- END BUTTONS -->
+
+                                {{ form_end(form) }}
+                            </div>
+
+                            <div class="col-md-9">
+                                <h2><i class="fa fa-file-o"></i> Resultats</h2>
+                                <hr>
+                                <div class="padding"></div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <tbody>
+                                        <thead>
+                                        <tr class="title-search">
+                                            <th scope="col" id="resultat">Titre</th>
+                                            <th scope="col">Auteur et description</th>
+                                            <th scope="col">Stock</th>
+                                            <th scope="col">Filière</th>
+                                            <th scope="col">Technologie</th>
+                                            <th scope="col">Site</th>
+                                            {% if is_granted('ROLE_FORMATOR') == true %}
+                                                <th scope="col">Action</th>
+                                            {% endif %}
+                                        </tr>
+                                        </thead>
+                                        <!-- TRIER PAR NOM ORDRE CROISSANT -->
+                                        {% for ouvrage in ouvrages|sort((a, b) => a.titre <=> b.titre) %}
+                                            <tr>
+                                                <td class="titre text-center">{{ ouvrage.titre|upper }}</td>
+                                                <td class="product">
+                                                    <strong>{{ ouvrage.auteur|upper }}</strong><br>{{ ouvrage.description }}
+                                                </td>
+                                                <td class="quantiteStock text-center">{{ ouvrage.quantiteStock }}</td>
+                                                <td class="filiere text-center">{{ ouvrage.filiere }}</td>
+                                                <td class="techno text-center">{{ ouvrage.technologie|upper }}</td>
+                                                <td class="site text-center">{{ ouvrage.site|upper }}</td>
+                                                {% if is_granted('ROLE_FORMATOR') == true %}
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary"><a
+                                                                    href="{{ path('updateOuvrage', {'id': ouvrage.id}) }}">Modifier
+                                                                ouvrage</a>
+                                                        </button>
+                                                        <button type="button" class="btn btn-primary"><a
+                                                                    href="{{ path('addEtatStock', {'id': ouvrage.id}) }}">Modifier
+                                                                stock</a>
+                                                        </button>
+                                                    </td>
+                                                {% endif %}
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    {#            <div class="container container-border">#}
+    {#                <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">#}
+    {#                    <div class="row col-lg-12">#}
+    {#                        <div class="col m6 offset-m3 champs">#}
+    {#                            <h1>{{ form_title_search }}</h1>#}
+
+    {#                            {{ form_start(form) }}#}
+
+    {#                            {{ form_row(form.sites) }}#}
+
+    {#                            {{ form_row(form.q) }}#}
+    {#                            <div class="row">#}
+    {#                                <div class="col-md-6">#}
+    {#                                    {{ form_row(form.filieres) }}#}
+    {#                                </div>#}
+    {#                                <div class="col-md-6">#}
+    {#                                    {{ form_row(form.technos) }}#}
+    {#                                </div>#}
+    {#                            </div>#}
+
+    {#                                                <h6>Quantité en stock</h6>#}
+    {#                            <div class="row">#}
+    {#                                <div class="col-md-6">#}
+    {#                                    {{ form_row(form.minQ) }}#}
+    {#                                </div>#}
+    {#                                <div class="col-md-6">#}
+    {#                                    {{ form_row(form.maxQ) }}#}
+    {#                                </div>#}
+    {#                            </div>#}
+    {#                            <div class="row">#}
+    {#                                <div class="col-md-12" style="text-align: center; margin-bottom: 20px;">#}
+
+    {#                                    <button type="submit" class="btn btn-primary" id="search">Rechercher</button>#}
+    {#                                </div>#}
+    {#                                <div class="col-md-6">#}
+    {#                                    <a class="btn btn-primary" href="{{ path('addOuvrage') }}">#}
+    {#                                        <span>Ajouter un nouvel ouvrage</span>#}
+    {#                                    </a>#}
+    {#                                </div>#}
+    {#                            </div>#}
+    {#                        </div>#}
+    {#                        {{ form_end(form) }}#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#    <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">#}
+    {#        <table class="table table-striped encadrement-title">#}
+    {#            <thead>#}
+    {#            <tr class="encadrement-title">#}
+    {#                <th scope="col">Titre</th>#}
+    {#                <th scope="col">Auteur</th>#}
+    {#                <th scope="col">Stock</th>#}
+    {#                <th scope="col">Filière</th>#}
+    {#                <th scope="col">Technologie</th>#}
+    {#                <th scope="col">Site</th>#}
+    {#                {% if is_granted('ROLE_FORMATOR') == true %}#}
+    {#                <th scope="col">Action</th>#}
+    {#                {% endif %}#}
+    {#            </tr>#}
+    {#            </thead>#}
+    {#            <tbody>#}
+    {#            {% for ouvrage in ouvrages %}#}
+    {#                <tr>#}
+    {#                    <td>{{ ouvrage.titre }}</td>#}
+    {#                    <td>{{ ouvrage.auteur }}</td>#}
+    {#                    <td>{{ ouvrage.quantiteStock }}</td>#}
+    {#                    <td>{{ ouvrage.filiere }}</td>#}
+    {#                    <td>{{ ouvrage.technologie }}</td>#}
+    {#                    <td>{{ ouvrage.site }}</td>#}
+    {#                    {% if is_granted('ROLE_FORMATOR') == true %}#}
+    {#                    <td>#}
+    {#                        <button type="button" class="btn btn-primary"><a#}
+    {#                                    href="{{ path('updateOuvrage', {'id': ouvrage.id}) }}">Modifier ouvrage</a>#}
+    {#                        </button>#}
+    {#                        <button type="button" class="btn btn-primary"><a#}
+    {#                                    href="{{ path('addEtatStock', {'id': ouvrage.id}) }}">Modifier stock</a>#}
+    {#                        </button>#}
+    {#                    </td>#}
+    {#                    {% endif %}#}
+    {#                </tr>#}
+    {#            {% endfor %}#}
+    {#            </tbody>#}
+    {#        </table>#}
+    {#    </div>#}
+    {#    </div>#}
+{% endblock %}

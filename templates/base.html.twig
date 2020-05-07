@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Gestion des stocks{% endblock %}</title>
+    {% block stylesheets %}
+        {#        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"#}
+        {#              integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"#}
+        {#              crossorigin="anonymous">#}
+
+        <link rel="icon" href="{{ asset('img/Content/Images/Static/favicon/favicon.ico') }}"/>
+
+        <link rel="apple-touch-icon" sizes="57x57"
+              href="{{ asset('img/Content/Images/Static/favicon/apple-icon-57x57.png') }}"/>
+        <link rel="apple-touch-icon" sizes="60x60"
+              href="{{ asset('img/Content/Images/Static/favicon/apple-icon-60x60.png') }}"/>
+        <link rel="apple-touch-icon" sizes="72x72"
+              href="{{ asset('img/Content/Images/Static/favicon/apple-icon-72x72.png') }}"/>
+        <link rel="apple-touch-icon" sizes="76x76"
+              href="{{ asset('img/Content/Images/Static/favicon/apple-icon-76x76.png') }}"/>
+        <link rel="apple-touch-icon" sizes="114x114"
+              href="{{ asset('img/Content/Images/Static/favicon/apple-icon-114x114.png') }}"/>
+        <link rel="apple-touch-icon" sizes="120x120"
+              href="{{ asset('img/Content/Images/Static/favicon/apple-icon-120x120.png') }}"/>
+        <link rel="apple-touch-icon" sizes="144x144"
+              href="{{ asset('img/Content/Images/Static/favicon/apple-icon-144x144.png') }}"/>
+        <link rel="apple-touch-icon" sizes="152x152"
+              href="{{ asset('img/Content/Images/Static/favicon/apple-icon-152x152.png') }}"/>
+        <link rel="apple-touch-icon" sizes="180x180"
+              href="{{ asset('img/Content/Images/Static/favicon/apple-icon-180x180.png') }}"/>
+        <link rel="icon" type="image/png" sizes="192x192"
+              href="{{ asset('img/Content/Images/Static/favicon/android-icon-192x192.png') }}"/>
+        <link rel="icon" type="image/png" sizes="32x32"
+              href="{{ asset('img/Content/Images/Static/favicon/favicon-32x32.png') }}"/>
+        <link rel="icon" type="image/png" sizes="96x96"
+              href="{{ asset('img/Content/Images/Static/favicon/favicon-96x96.png') }}"/>
+        <link rel="icon" type="image/png" sizes="16x16"
+              href="{{ asset('img/Content/Images/Static/favicon/favicon-16x16.png') }}"/>
+        <link rel="manifest" href="{{ asset('img/Content/Images/Static/favicon/manifest.json') }}"/>
+        <meta name="msapplication-TileImage"
+              content="{{ asset('/img/Content/Images/Static/favicon/ms-icon-144x144.png') }}"/>
+
+        <link rel="stylesheet" href="{{ asset("css/app.min.css") }}">
+        <link rel="stylesheet" href="{{ asset("css/base.css") }}">
+    {% endblock %}
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top navbar-border">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img src="/img/Content/Images/Static/logo-eni.png"
+                                                  alt=""
+                                                  id="logo"/></a>
+            <a class="navbar-brand navbar-eni-home" href="/"><h3>ENI - Gestion des stocks</h3></a>
+        </div>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <div class="collapse navbar-collapse" id="navbar-menu-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                {% if is_granted('ROLE_ADMIN') == true %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-expanded="false"><i
+                                    class="icon-location icon-2x visible-xs-inline visible-sm-inline"></i> UTILISATEURS
+                            <span
+                                    class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-menu-left col-lg-1" role="menu">
+                            <li>
+                                <a class="valign" href="{{ path('users') }}">
+                                    <span class="valigned">Voir la liste des utilisateurs</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="valign" href="{{ path('addUser') }}">
+                                    <span class="valigned">Créer un nouvel utilisateur</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                {% endif %}
+                {% if is_granted('ROLE_FORMATOR') == true %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-expanded="false"><i
+                                    class="icon-briefcase visible-xs-inline visible-sm-inline"></i> OUVRAGES <span
+                                    class="caret"></span></a>
+
+                        <ul class="dropdown-menu dropdown-menu-left col-lg-1" role="menu">
+                            <li>
+                                <a class="valign" href="{{ path('ouvrages') }}">
+                                    <span class="valigned">Voir la liste des ouvrages</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="valign" href="{{ path('addOuvrage') }}">
+                                    <span class="valigned">Créer un nouvel ouvrage</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="valign" href="{{ path('ouvrage_search') }}">
+                                    <span class="valigned">Chercher</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') == true %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-expanded="false"><i
+                                    class="icon-location icon-2x visible-xs-inline visible-sm-inline"></i> FILI&Egrave;RES
+                            <span
+                                    class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-menu-left col-lg-1" role="menu">
+                            <li>
+                                <a class="valign" href="{{ path('filieres') }}">
+                                    <span class="valigned">Voir la liste des filières</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="valign" href="{{ path('addFiliere') }}">
+                                    <span class="valigned">Créer une nouvelle filière</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-expanded="false"><i
+                                    class="icon-location icon-2x visible-xs-inline visible-sm-inline"></i> TECHNOLOGIES
+                            <span
+                                    class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-menu-left col-lg-1" role="menu">
+                            <li>
+                                <a class="valign" href="{{ path('technos') }}">
+                                <span class="valigned">Voir la liste des
+                                        technologies</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="valign" href="{{ path('addTechno') }}">
+                                    <span class="valigned">Créer une nouvelle technologie</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-expanded="false"><i
+                                    class="icon-location icon-2x visible-xs-inline visible-sm-inline"></i> SITES <span
+                                    class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-menu-left col-lg-1" role="menu">
+                            <li>
+                                <a class="valign" href="{{ path('sites') }}">
+                                <span class="valigned">Voir la liste des
+                                        sites</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="valign" href="{{ path('addSite') }}">
+                                    <span class="valigned">Créer un nouveau site</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                {% endif %}
+                <li>
+                    <a href="{{ path('contact') }}">
+                        <i class="icon-edit icon-2x visible-xs-inline visible-sm-inline"></i>CONTACTEZ-NOUS</a>
+                </li>
+
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-expanded="false"><i
+                                class="icon-location icon-2x visible-xs-inline visible-sm-inline"></i> {{ app.user.firstName|upper }} <span
+                                class="caret"></span></a>
+                    <ul class="dropdown-menu dropdown-menu-left col-lg-1" role="menu">
+                        <li>
+                            <a class="valign" href="{{ path('app_logout') }}">
+                                <span class="valigned">Se déconnecter</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="valign" href="">
+                                <span class="valigned">Profil</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                {#{% if app.user %}#}
+                {#    <div class="mb-3">#}
+                {#        Bonjour {{ app.user.firstName }} {{ app.user.lastName }} !#}
+                {#        #}{#        <a href="{{ path('app_logout') }}">Se déconnecter</a>#}
+                {#    </div>#}
+                {#{% endif %}#}
+
+
+{#                <li>#}
+{#                    #}{#                                        Si l'utilisateur est connecté, l'option se déconnecter#}
+{#                    {% if app.user %}#}
+{#                        <a href="{{ path('app_logout') }}">#}
+{#                            <i class="icon-edit icon-2x visible-xs-inline visible-sm-inline"></i>SE#}
+{#                            D&Eacute;CONNECTER</a>#}
+{#                    {% endif %}#}
+{#                </li>#}
+                {% endif %}
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container -->
+</nav>
+
+<div class="body-content container-fluid home">
+    <header class="row no-header">
+    </header>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    <div class="row visible-xs-block visible-sm-block" id="accueil-menu-small">
+        {% if is_granted('ROLE_FORMATOR') == true %}
+            <a class="btn btn-sprite xs-24 sm-22 md-24 btn-formation col-xs-12 nos-formations" data-toggle='collapse'
+               href='#collapseFormations' aria-expanded='false' aria-controls='collapseFormations'>
+                <i class="sprite-formation"></i>
+                OUVRAGES
+            </a>
+            <div class="collapse" id="collapseFormations">
+                <a class="WhatToChoose" href="{{ path('ouvrages') }}">Voir la liste des ouvrages</a>
+                <a class="WhatToChoose" href="{{ path('addOuvrage') }}">Créer un nouvel ouvrage</a>
+                <a class="WhatToChoose" href="{{ path('ouvrage_search') }}">Chercher</a>
+            </div>
+        {% endif %}
+        {% if is_granted('ROLE_ADMIN') == true %}
+            <a class="btn btn-sprite xs-24 sm-22 md-24 btn-ecole col-xs-12" data-toggle='collapse'
+               href='#collapseFormations' aria-expanded='false' aria-controls='collapseFormations'>
+                <i class="sprite-ecole"></i>
+                FILI&Egrave;RES
+            </a>
+            <div class="collapse" id="collapseFormations">
+                <a class="WhatToChoose" href="{{ path('filieres') }}">Voir la liste des filières</a>
+                <a class="WhatToChoose" href="{{ path('addFiliere') }}">Créer une nouvelle filière</a>
+            </div>
+
+            <a class="btn btn-sprite xs-24 sm-22 md-24 btn-campus col-xs-12">
+                <i class="sprite-campus"></i>
+                TECHNOLOGIES
+            </a>
+            <div class="collapse" id="collapseFormations">
+                <a class="WhatToChoose" href="{{ path('technos') }}">Voir la liste des technologies</a>
+                <a class="WhatToChoose" href="{{ path('addTechno') }}">Créer une nouvelle technologies</a>
+            </div>
+
+            <a class="btn btn-sprite xs-24 sm-22 md-24 btn-postuler col-xs-12">
+                <i class="sprite-postuler"></i>
+                SITES
+            </a>
+            <div class="collapse" id="collapseFormations">
+                <a class="WhatToChoose" href="{{ path('sites') }}">Voir la liste des sites</a>
+                <a class="WhatToChoose" href="{{ path('addSite') }}">Créer un nouveau site</a>
+            </div>
+        {% endif %}
+        <a href="{{ path('contact') }}" class="btn btn-sprite xs-24 sm-22 md-24 btn-contact col-xs-12">
+            <i class="sprite-contacter"></i>
+            CONTACTEZ-NOUS
+        </a>
+        <a href="{{ path('app_logout') }}" class="btn btn-sprite xs-24 sm-22 md-24 btn-contact col-xs-12">
+            <i class="sprite-entreprise"></i>
+            SE D&Eacute;CONNECTER
+        </a>
+
+    </div>
+</div>
+
+<div class="container">
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert{{ label }}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>
+
+{% endif %}
+{#{% if app.user %}#}
+{#    <div class="mb-3">#}
+{#        Bonjour {{ app.user.firstName }} {{ app.user.lastName }} !#}
+{#        #}{#        <a href="{{ path('app_logout') }}">Se déconnecter</a>#}
+{#    </div>#}
+{#{% endif %}#}
+{% block body %}
+{% endblock %}
+{% block javascripts %}
+    <script src="/public/js/modernizer-min.js"></script>
+    <script src="/public/js/jquery-bundle.min.js"></script>
+    <script src="/public/js/bootstrap-bundle.min.js"></script>
+    <script src="/public/js/app_scripts.min.js"></script>
+{% endblock %}
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+</html>

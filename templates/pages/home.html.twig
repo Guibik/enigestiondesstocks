@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Gestion des stocks' %}
+
+
+{% block body %}
+    <div class="text-center">
+        <div class="title-style">
+{#            <h1>Gestion des stocks</h1>#}
+            <img id="logo" class="logo-book" src="{{ asset('img/Logo3-gestion-des-stocks.jpg') }}" alt="">
+        </div>
+        {% if app.user %}
+            <ul class="navbar-nav">
+                <li class="nav-item">
+{#                                    {% for site in sites %}#}
+{#                                    <label>Choisissez votre site</label>#}
+{#                                    <select name="choixSite" >#}
+{#                                        <option value="choixSites">{{ form(site.nomSite) }}</option>#}
+{#                                    </select>#}
+{#                                    {% endfor %}#}
+                </li>
+            </ul>
+
+        {% endif %}
+        {% if app.user is null %}
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <br>
+                    <br>
+                    Pour pouvoir accéder au site, connectez-vous : <a href="{{ path('app_login') }}" class="nav-link">Se
+                        connecter</a>
+                </li>
+            </ul>
+        {% endif %}
+    </div>
+    <div class="container">
+
+    </div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme filiereForm 'bootstrap_4_horizontal_layout.html.twig' %}
+
+{% block body %}
+
+    <div class="container-form">
+        <form id="contact" action="" method="post">
+            <h3 style="text-align: center;">{{ form_title }}</h3>
+            {{ form_start(filiereForm) }}
+            <fieldset>
+                {{ form_widget(filiereForm) }}
+            </fieldset>
+            <fieldset>
+                <button class="btn btn-success" type="submit">Enregistrer la modification</button>
+                {{ form_end(filiereForm) }}
+            </fieldset>
+        </form>
+    </div>
+
+
+{#    <div class="container">#}
+{#        <h3>{{ form_title }}</h3>#}
+{#        <br>#}
+{#        <div class="form-row">#}
+{#            <div class="form-groupe col-md-12">#}
+{#                {{ form_start(filiereForm) }}#}
+{#                {{ form_widget(filiereForm) }}#}
+{#                <br>#}
+{#                <button class="btn btn-success" type="submit">Valider</button>#}
+{#                {{ form_end(filiereForm) }}#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{% endblock %}

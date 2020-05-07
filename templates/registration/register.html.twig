@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un compte{% endblock %}
+
+{% block body %}
+<div class="container center">
+    <h1>Enregistrez-vous pour accéder aux services</h1>
+    <div class="form-row row nom">
+        <div class="form-group col-sm-6">
+<br>
+            {{ form_start(registrationForm) }}
+
+            <div class="row">
+                <div class="col-6">{{ form_label(registrationForm.email) }}</div>
+                <div class="col-6">{{ form_widget(registrationForm.email) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-6">{{ form_label(registrationForm.plainPassword) }}</div>
+                <div class="col-6">{{ form_widget(registrationForm.plainPassword) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-6">{{ form_label(registrationForm.last_name) }}</div>
+                <div class="col-6">{{ form_widget(registrationForm.last_name) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-6">{{ form_label(registrationForm.first_name) }}</div>
+                <div class="col-6">{{ form_widget(registrationForm.first_name) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-6">{{ form_label(registrationForm.phone) }}</div>
+                <div class="col-6">{{ form_widget(registrationForm.phone) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-6">{{ form_label(registrationForm.function) }}</div>
+                <div class="col-6">{{ form_widget(registrationForm.function) }}</div>
+            </div>
+            <br>
+            <div class="row center">
+                <div class="col-12">
+                    <button class="btn btn-outline-dark" type="submit">S'enregistrer</button>
+                </div>
+            </div>
+            {{ form_end(registrationForm) }}
+        </div>
+        {% endblock %}

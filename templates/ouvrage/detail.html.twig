@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ form_title }}{% endblock %}
+
+{% block body %}
+    <div class="container container-border">
+        <h1>{{ form_title }}</h1>
+        <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <table class="table table-striped encadrement-title">
+                <thead>
+                <tr class="title-search">
+                    <th scope="col">Titre</th>
+                    <th scope="col">Auteur</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Filière</th>
+                    <th scope="col">Technologie</th>
+                    <th scope="col">Site</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for ouvrage in ouvrages|sort((a, b) => a.titre <=> b.titre) %}
+                    <tr>
+                        <td>{{ ouvrage.titre|upper }}</td>
+                        <td>{{ ouvrage.auteur }}</td>
+                        <td>{{ ouvrage.quantiteStock }}</td>
+                        <td>{{ ouvrage.filiere }}</td>
+                        <td>{{ ouvrage.technologie }}</td>
+                        <td>{{ ouvrage.site }}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary offset-4"><a
+                                        href="{{ path('updateOuvrage', {'id': ouvrage.id}) }}">Modifier</a></button>
+                            <button type="button" class="btn btn-primary offset-4"><a
+                                        href="{{ path('deleteOuvrage', {'id': ouvrage.id}) }}">Supprimer</a></button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+        {#            {% for ouvrage in ouvrages %}#}
+
+        {#                    <dl class="row">#}
+        {#                        <dt class="col-sm-3 offset-3">Titre :</dt>#}
+        {#                        <dd class="col-sm-6">{{ ouvrage.titre }}</dd>#}
+
+        {#                        <dt class="col-sm-3 offset-3">Auteur :</dt>#}
+        {#                        <dd class="col-sm-6">{{ ouvrage.auteur }}</dd>#}
+        {#                        <dt class="col-sm-3 offset-3">Description :</dt>#}
+        {#                        <dd class="col-sm-6">{{ ouvrage.description }}</dd>#}
+        {#                        <dt class="col-sm-3 offset-3">ISBN :</dt>#}
+        {#                        <dd class="col-sm-6">{{ ouvrage.isbn }}</dd>#}
+        {#                        <dt class="col-sm-3 offset-3">Nombre de tome :</dt>#}
+        {#                        <dd class="col-sm-6">{{ ouvrage.nbreTome }}</dd>#}
+        {#                        <dt class="col-sm-3 offset-3">Nombe de page :</dt>#}
+        {#                        <dd class="col-sm-6">{{ ouvrage.nbrePage }}</dd>#}
+        {#                        <dt class="col-sm-3 offset-3">Quantité en stock :</dt>#}
+        {#                        <dd class="col-sm-6">{{ ouvrage.quantiteStock }}</dd>#}
+        {#                        <dt class="col-sm-3 offset-3">Filière :</dt>#}
+        {#                        <dd class="col-sm-6">{{ ouvrage.filiere }}</dd>#}
+        {#                        <dt class="col-sm-3 offset-3">Technologie :</dt>#}
+        {#                        <dd class="col-sm-6">{{ ouvrage.technologie }}</dd>#}
+        {#                        <dt class="col-sm-3 offset-3">Site :</dt>#}
+        {#                        <dd class="col-sm-6">{{ ouvrage.site }}</dd>#}
+
+        {#    <div class="form-group">#}
+        {#        <div class="col-xs-12 col-md-offset-8 col-md-4">#}
+        {#            <button type="button" class="btn form-control btn-envoyer btn-56"><a#}
+        {#                        href="{{ path('updateOuvrage', {'id': ouvrage.id}) }}">Modifier</a></button>#}
+        {#            <button type="button" class="btn form-control btn-envoyer btn-56"><a#}
+        {#                        href="{{ path('deleteOuvrage', {'id': ouvrage.id}) }}">Supprimer</a></button>#}
+        {#        </div>#}
+        {#    </div>#}
+        {#    </dl>#}
+
+        {#    {% endfor %}#}
+        {#</div>#}

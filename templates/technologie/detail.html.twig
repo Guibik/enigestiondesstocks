@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ form_title }}{% endblock %}
+
+{% block body %}
+
+    <div class="container container-border">
+        <h1>{{ form_title }}</h1>
+        <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <table class="table table-striped encadrement-title">
+                <thead>
+                <tr class="title-search">
+                    <th scope="col">Nom de la techno</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for techno in technos|sort((a, b) => a.nomTechno <=> b.nomTechno) %}
+                    <tr>
+                        <td>{{ techno.nomTechno|upper }}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary offset-4"><a
+                                        href="{{ path('updateTechno', {'id': techno.id}) }}">Modifier</a></button>
+                            <button type="button" class="btn btn-primary offset-4"><a
+                                        href="{{ path('deleteTechno', {'id': techno.id}) }}">Supprimer</a></button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
+{#    <div class="container">#}
+{#        <h1>{{ form_title }}</h1>#}
+{#        {% for techno in technos %}#}
+{#            <div class="card border-detail detail col-md-6">#}
+{#                <dl class="row center-block">#}
+{#                    <dt class="col-sm-3 offset-3">Nom de la techno :</dt>#}
+{#                    <dd class="col-sm-6">{{ techno.nomTechno }}</dd>#}
+{#                </dl>#}
+
+{#                <div class="form-group">#}
+{#                    <div class="col-xs-12 col-md-offset-8 col-md-4 center-block">#}
+{#                        <button type="button" class="btn form-control btn-envoyer btn-56"><a#}
+{#                                    href="{{ path('updateTechno', {'id': techno.id}) }}">Modifier</a></button>#}
+{#                        <button type="button" class="btn form-control btn-envoyer btn-56"><a#}
+{#                                    href="{{ path('deleteTechno', {'id': techno.id}) }}">Supprimer</a></button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        {% endfor %}#}
+{#    </div>#}
+
+{% endblock %}

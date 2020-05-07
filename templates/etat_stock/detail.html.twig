@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ form_title }}{% endblock %}
+
+{% block body %}
+    <div class="container" style="color: #0a0a0a">
+        <h1>{{ form_title }}</h1>
+        {% for etatStock in etatStocks %}
+            <div class="card detail col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-3 offset-3">Date :</dt>
+                    <dd class="col-sm-6">{{ etatStocks.dateEtatStock |date("m/d/Y") }}</dd>
+
+
+
+                    <button type="button" class="btn btn-default col-sm-3 offset-3"><a
+                                href="{{ path('updateEtatStock', {'id': etatStock.id}) }}">Modifier</a></button>
+                    <button type="button" class="btn btn-default col-sm-3"><a
+                                href="{{ path('deleteEtatStock', {'id': EtatStock.id}) }}">Supprimer</a></button>
+                </dl>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

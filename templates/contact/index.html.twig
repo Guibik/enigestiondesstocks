@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contactez-nous !{% endblock title %}
+
+{% block body %}
+
+    <div class="bg-bleu-fonce" style="color: white">
+        <div class="row form-contact bg-bleu-fonce">
+
+
+            <div class="formulaire saisie col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8"
+                 id="form-input">
+                <h2>Nous contacter</h2>
+                <div class="adresse-contact xs-18 md-23">
+                    <p>Tél : 02 28 03 17 28 - E-mail : ecole@eni-ecole.fr</p>
+                    <p>ou en complétant le formulaire ci-dessous</p>
+                </div>
+                {{ form_start(form) }}
+                <div class="row">
+
+                        <div class="form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 champs " id="nom">
+                                <span class="field-validation-valid" data-valmsg-for="Nom"
+                                      data-valmsg-replace="true">{{ form_widget(form.lastName) }}</span>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 champs " id="prenom">
+                                <span class="field-validation-valid" data-valmsg-for="Prenom"
+                                      data-valmsg-replace="true">{{ form_widget(form.firstName) }}</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 champs ">
+                                <span class="field-validation-valid" data-valmsg-for="Email"
+                                      data-valmsg-replace="true">{{ form_widget(form.email) }}</span>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 champs " id="phone">
+                                <span class="field-validation-valid" data-valmsg-for="Phone"
+                                      data-valmsg-replace="true">{{ form_widget(form.phone) }}</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 champs">
+                                <span class="field-validation-valid" data-valmsg-for="Message"
+                                      data-valmsg-replace="true">{{ form_widget(form.message) }}</span>
+                            </div>
+                        </div>
+                        <small class="form-grpd">En complétant ce formulaire, vous acceptez d'être contacté afin de
+                            recevoir des informations sur nos produits et services ainsi que nos communications
+                            marketing. Vous aurez la possibilité de vous désabonner de nos communications à tout moment.
+                            <a id="cgv" href="https://www.eni-ecole.fr/grpd" target="_blank">Pour plus d'informations, cliquez
+                                ici.</a></small>
+                        <div class="form-group">
+                            <div class="col-xs-12 col-md-offset-8 col-md-4">
+                                <input type="submit" value="ENVOYER" class="btn form-control btn-envoyer btn-56"/>
+                            </div>
+                        </div>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

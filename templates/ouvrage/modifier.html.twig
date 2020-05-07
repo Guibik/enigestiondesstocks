@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme ouvrageForm 'bootstrap_4_horizontal_layout.html.twig' %}
+
+{% block body %}
+    <div class="container-form">
+        <form id="contact" action="" method="post">
+            <h3 style="text-align: center;">{{ form_title }}</h3>
+            {{ form_start(ouvrageForm) }}
+            <fieldset>
+                {{ form_widget(ouvrageForm.titre) }}
+            </fieldset>
+            <fieldset>
+                {{ form_widget(ouvrageForm.auteur) }}
+            </fieldset>
+            <fieldset>
+                {{ form_widget(ouvrageForm.description) }}
+            </fieldset>
+            <fieldset>
+                {{ form_widget(ouvrageForm.isbn) }}
+            </fieldset>
+            <fieldset>
+                {{ form_widget(ouvrageForm.nbreTome) }}
+            </fieldset>
+            <fieldset>
+                {{ form_widget(ouvrageForm.nbrePage) }}
+            </fieldset>
+            <fieldset>
+                {{ form_widget(ouvrageForm.quantiteStock) }}
+            </fieldset>
+            <fieldset>
+                {{ form_widget(ouvrageForm.filiere, {value: "Filière" }) }}
+            </fieldset>
+            <fieldset>
+                {{ form_widget(ouvrageForm.technologie) }}
+            </fieldset>
+            <fieldset>
+                {{ form_widget(ouvrageForm.site) }}
+            </fieldset>
+            <fieldset>
+                <button class="btn btn-success" type="submit">Valider</button>
+                {{ form_end(ouvrageForm) }}
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}

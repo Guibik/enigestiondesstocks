@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ form_title }}{% endblock %}
+
+{% block body %}
+    <div class="jumbotron">
+        <div class="container">
+            {{ form_start(form) }}
+            <div class="form-row align-items-end">
+                <div class="col">
+                    {{ form_row(form.q) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.site) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.minQ) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.maxQ) }}
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <button class="btn btn-primary">Rechercher</button>
+                    </div>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+    <div class="container mt-4">
+        <h1>{{ form_title_search }}</h1>
+        <div class="row">
+            {% for ouvrage in ouvrages %}
+
+                <table>
+                    <thead>
+                    <th>Titre</th>
+                    <th>Auteur</th>
+                    <th>Description</th>
+                    </thead>
+                    <tbody>
+                    <td>{{ ouvrage.titre }}</td>
+                    <td>{{ ouvrage.auteur }}</td>
+                    <td>{{ ouvrage.description }}</td>
+                    </tbody>
+                </table>
+
+                {#                <div class="card detail col-md-6">#}
+                {#                    <dl class="row">#}
+                {#                        <dt class="col-sm-3 offset-3">Titre :</dt>#}
+                {#                        <dd class="col-sm-6">{{ ouvrage.titre }}</dd>#}
+                {#                        <dt class="col-sm-3 offset-3">Auteur :</dt>#}
+                {#                        <dd class="col-sm-6">{{ ouvrage.auteur }}</dd>#}
+                {#                        <dt class="col-sm-3 offset-3">Description :</dt>#}
+                {#                        <dd class="col-sm-6">{{ ouvrage.description }}</dd>#}
+                {#                        <dt class="col-sm-3 offset-3">ISBN :</dt>#}
+                {#                        <dd class="col-sm-6">{{ ouvrage.isbn }}</dd>#}
+                {#                        <dt class="col-sm-3 offset-3">Nombre de tome :</dt>#}
+                {#                        <dd class="col-sm-6">{{ ouvrage.nbreTome }}</dd>#}
+                {#                        <dt class="col-sm-3 offset-3">Nombe de page :</dt>#}
+                {#                        <dd class="col-sm-6">{{ ouvrage.nbrePage }}</dd>#}
+                {#                        <dt class="col-sm-3 offset-3">Quantité en stock :</dt>#}
+                {#                        <dd class="col-sm-6">{{ ouvrage.quantiteStock }}</dd>#}
+                {#                    </dl>#}
+                {#                </div>#}
+            {% endfor %}
+        </div>
+{#        <div class="pagination">#}
+{#            {{ knp_pagination_render(ouvrages) }}#}
+{#        </div>#}
+    </div>
+{% endblock %}

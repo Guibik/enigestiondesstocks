@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme userForm 'bootstrap_4_horizontal_layout.html.twig' %}
+
+{% block title %}{{ form_title }}{% endblock %}
+
+{% block body %}
+
+    <div class="container-form">
+        <form id="contact" action="" method="post">
+            <h3 style="text-align: center;">{{ form_title }}</h3>
+            {{ form_start(userForm) }}
+            <fieldset>
+                {{ form_widget(userForm.lastName) }}
+            </fieldset>
+            <fieldset>
+                {{ form_widget(userForm.firstName) }}
+            </fieldset>
+            <fieldset>
+                {{ form_widget(userForm.phone) }}
+            </fieldset>
+            <fieldset>
+                {{ form_widget(userForm.email) }}
+            </fieldset>
+            <fieldset>
+                {{ form_widget(userForm.function) }}
+            </fieldset>
+            <fieldset>
+                {{ form_widget(userForm.plainPassword) }}
+            </fieldset>
+            <fieldset>
+                <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Enregistrer</button>
+                {{ form_end(userForm) }}
+            </fieldset>
+        </form>
+    </div>
+
+
+{#    <div class="container" style="color: #0a0a0a">#}
+{#        <h3>{{ form_title }}</h3>#}
+{#        <br>#}
+{#        <div class="form-row">#}
+{#            <div class="form-groupe col-md-12">#}
+{#                {{ form_start(userForm) }}#}
+{#                {{ form_widget(userForm) }}#}
+{#                <br>#}
+{#                <div class="form-group">#}
+{#                    <div class="col-xs-12 col-md-offset-8 col-md-4">#}
+{#                        <button class="btn form-control btn-envoyer btn-56" type="submit">Valider</button>#}
+{#                    </div>#}
+{#                </div>#}
+{#                {{ form_end(userForm) }}#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{% endblock %}

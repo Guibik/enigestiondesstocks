@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ form_title }}{% endblock %}
+
+{% block body %}
+    <div class="container container-border">
+        <h1>{{ form_title }}</h1>
+        <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <table class="table table-striped encadrement-title">
+                <thead>
+                <tr class="title-search">
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">Téléphone</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Fonction</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users|sort((a, b) => a.lastName <=> b.lastName) %}
+                    <tr>
+                        <td>{{ user.lastName|upper }}</td>
+                        <td>{{ user.firstName|capitalize }}</td>
+                        <td>{{ user.phone }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.function|capitalize }}</td>
+                        <td>
+{#                            <button type="button" class="btn btn-default col-sm-3 offset-3"><a#}
+{#                                        href="{{ path('updateUser', {'id': user.id}) }}">Modifier</a></button>#}
+{#                            <button type="button" class="btn btn-default col-sm-3"><a#}
+{#                                        href="{{ path('deleteUser', {'id': user.id}) }}">Supprimer</a></button>#}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </div>
+
+
+
+    {#    <div class="container">#}
+    {#        <h1>{{ form_title }}</h1>#}
+    {#        {% for user in users %}#}
+    {#            <div class="card detail col-md-6">#}
+    {#                <dl class="row">#}
+    {#                    <dt class="col-sm-3 offset-3">Nom :</dt>#}
+    {#                    <dd class="col-sm-6">{{ user.lastName }}</dd>#}
+
+    {#                    <dt class="col-sm-3 offset-3">Prenom :</dt>#}
+    {#                    <dd class="col-sm-6">{{ user.firstName }}</dd>#}
+    {#                    <dt class="col-sm-3 offset-3">Téléphone :</dt>#}
+    {#                    <dd class="col-sm-6">{{ user.phone }}</dd>#}
+    {#                    <dt class="col-sm-3 offset-3">Email :</dt>#}
+    {#                    <dd class="col-sm-6">{{ user.email }}</dd>#}
+    {#                    <dt class="col-sm-3 offset-3">Fonction :</dt>#}
+    {#                    <dd class="col-sm-6">{{ user.function }}</dd>#}
+
+    {#                    <button type="button" class="btn btn-default col-sm-3 offset-3"><a#}
+    {#                                href="{{ path('updateUser', {'id': user.id}) }}">Modifier</a></button>#}
+    {#                    <button type="button" class="btn btn-default col-sm-3"><a#}
+    {#                                href="{{ path('deleteUser', {'id': user.id}) }}">Supprimer</a></button>#}
+    {#                </dl>#}
+    {#            </div>#}
+    {#        {% endfor %}#}
+    {#    </div>#}
+
+{% endblock %}
