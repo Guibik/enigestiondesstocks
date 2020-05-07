@@ -1,4 +1,4 @@
-# Création d'une application de gestion de matériel pour "Scouts Guides de France" avec "Symfony"
+# Création d'une application de gestion des stocks avec "Symfony 4"
 
 Voici le projet d'une application pour la gestion des stocks d'ouvrage à l'ENI.
 
